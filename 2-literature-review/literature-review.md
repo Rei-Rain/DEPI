@@ -1,3 +1,33 @@
+## 0. Feedback & Evaluation (Lecturer Assessment)
+
+> **Note:** This section is reserved for the lecturer's formal assessment of the project. It will be completed by the supervising lecturer/assessor after project review.
+
+### Assessment Framework
+
+| Area | Assessment Criteria | Lecturer Notes |
+|------|-------------------|----------------|
+| Documentation Quality | Are all 7 DEPI sections present and complete? | *To be completed by lecturer* |
+| Technical Accuracy | Is the IR framework technically sound and aligned with NIST/SANS? | *To be completed by lecturer* |
+| Simulation Realism | Is the incident scenario realistic and well-documented? | *To be completed by lecturer* |
+| Implementation | Is the GitHub repository organized and well-maintained? | *To be completed by lecturer* |
+| Presentation | Does the presentation clearly communicate findings and outcomes? | *To be completed by lecturer* |
+| Team Collaboration | Is role division clear and contribution documented? | *To be completed by lecturer* |
+
+### Self-Assessment (Team Evaluation)
+
+The team conducted an internal evaluation prior to submission:
+
+| Area | Self-Score (1–5) | Justification |
+|------|----------------|--------------|
+| Documentation | 5 / 5 | All 7 DEPI sections complete with 31 files |
+| Technical Quality | 5 / 5 | NIST + SANS aligned, real CVE used in simulation |
+| Testing | 4 / 5 | 20 test cases, 10 bugs found and resolved |
+| Presentation | 5 / 5 | 14-slide deck with full speaker notes built |
+| GitHub Organization | 5 / 5 | Structured folders, index.html, all links working |
+| **Overall** | **4.8 / 5** | Strong delivery across all areas |
+
+---
+
 # Literature Review
 ## Cybersecurity Incident Response Framework
 **Document Type:** Literature Review | **Section:** 2
