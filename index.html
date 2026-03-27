@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Incident Response Framework — DEPI</title>
+<style>
+  :root {
+    --blue: #2E5FA3;
+    --dark-blue: #1F3F7A;
+    --light-blue: #E8EFF9;
+    --teal: #0F6E56;
+    --light-teal: #E1F5EE;
+    --amber: #854F0B;
+    --light-amber: #FAEEDA;
+    --purple: #534AB7;
+    --light-purple: #EEEDFE;
+    --gray: #5F5E5A;
+    --light-gray: #F5F4F0;
+    --border: #E0DED8;
+    --text: #2C2C2A;
+    --text-secondary: #5F5E5A;
+    --green: #1A7A4A;
+    --red: #C0392B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--text); background: #FAFAF8; line-height: 1.6; }
+
+  /* HEADER */
+  .hero { background: var(--blue); color: white; padding: 48px 24px 40px; text-align: center; }
+  .hero h1 { font-size: 26px; font-weight: 600; margin-bottom: 8px; }
+  .hero p { font-size: 15px; opacity: 0.85; margin-bottom: 20px; }
+  .badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; }
+
+  /* METRICS */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; padding: 24px; max-width: 900px; margin: 0 auto; }
+  .metric { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .metric-val { font-size: 22px; font-weight: 700; color: var(--blue); }
+  .metric-label { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* MAIN LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px 48px; }
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-secondary); margin: 28px 0 12px; }
+
+  /* DEPI SECTIONS GRID */
+  .depi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .depi-card { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow .15s, transform .15s; display: block; }
+  .depi-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .depi-card-header { padding: 12px 14px 10px; display: flex; align-items: center; gap: 10px; }
+  .depi-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .depi-card-title { font-size: 13px; font-weight: 600; }
+  .depi-card-files { padding: 0 14px 12px; }
+  .file-link { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--blue); text-decoration: none; padding: 3px 0; }
+  .file-link:hover { text-decoration: underline; }
+  .file-icon { font-size: 13px; }
+
+  /* WEEKLY WORK */
+  .weeks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .week-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .week-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .week-num { width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .week-title { font-size: 13px; font-weight: 600; }
+  .week-status { font-size: 11px; color: var(--green); font-weight: 500; margin-bottom: 6px; }
+
+  /* DELIVERABLES */
+  .deliverables-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .del-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; transition: box-shadow .15s; }
+  .del-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+  .del-icon { font-size: 24px; flex-shrink: 0; }
+  .del-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .del-type { font-size: 11px; color: var(--text-secondary); }
+
+  /* TEAM */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .team-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .team-role { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+  .team-name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .team-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+
+  /* STATUS BANNER */
+  .status-banner { background: #EAF6EE; border: 1px solid #C0DD97; border-radius: 10px; padding: 14px 18px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .status-dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+  .status-text { font-size: 13px; color: var(--green); font-weight: 500; }
+
+  footer { text-align: center; padding: 24px; font-size: 12px; color: var(--text-secondary); border-top: 1px solid var(--border); }
+
+  /* Color classes */
+  .c1 { background: #E6F1FB; color: #0C447C; }
+  .c2 { background: #E1F5EE; color: #085041; }
+  .c3 { background: #FAEEDA; color: #633806; }
+  .c4 { background: #EEEDFE; color: #3C3489; }
+  .c5 { background: #FAECE7; color: #4A1B0C; }
+  .c6 { background: #EAF3DE; color: #173404; }
+  .c7 { background: #FBEAF0; color: #4B1528; }
+  .w1 { background: #E6F1FB; color: #0C447C; }
+  .w2 { background: #E1F5EE; color: #085041; }
+  .w3 { background: #FAEEDA; color: #633806; }
+  .w4 { background: #EEEDFE; color: #3C3489; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🔐 Cybersecurity Incident Response Framework</h1>
+  <p>DEPI Academic Project — 4-Week Deliverable — All sections complete</p>
+  <div class="badges">
+    <span class="badge">✅ All 4 weeks complete</span>
+    <span class="badge">📋 7 DEPI sections covered</span>
+    <span class="badge">📁 31 documents</span>
+    <span class="badge">🔗 GitHub: rei-rain/DEPI</span>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="metric-val">8 min</div><div class="metric-label">Detection time</div></div>
+  <div class="metric"><div class="metric-val">32 min</div><div class="metric-label">Containment time</div></div>
+  <div class="metric"><div class="metric-val">3.5 hrs</div><div class="metric-label">Full recovery</div></div>
+  <div class="metric"><div class="metric-val">$0</div><div class="metric-label">Ransom paid</div></div>
+  <div class="metric"><div class="metric-val">100%</div><div class="metric-label">Systems restored</div></div>
+  <div class="metric"><div class="metric-val">7/7</div><div class="metric-label">DEPI sections</div></div>
+</div>
+
+<div class="container">
+
+  <div class="status-banner">
+    <div class="status-dot"></div>
+    <div class="status-text">All deliverables complete — project submitted successfully</div>
+  </div>
+
+  <!-- DEPI SECTIONS -->
+  <div class="section-title">DEPI Documentation Sections</div>
+  <div class="depi-grid">
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c1">1</div>
+        <div class="depi-card-title">Project Planning & Management</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/1-project-planning/project-proposal.md" target="_blank">📄 project-proposal.md</a>
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/1-project-planning/project-plan.md" target="_blank">📄 project-plan.md</a>
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/1-project-planning/risk-assessment.md" target="_blank">📄 risk-assessment.md</a>
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/1-project-planning/kpis.md" target="_blank">📄 kpis.md</a>
+      </div>
+    </div>
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c2">2</div>
+        <div class="depi-card-title">Literature Review</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/2-literature-review/literature-review.md" target="_blank">📄 literature-review.md</a>
+      </div>
+    </div>
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c3">3</div>
+        <div class="depi-card-title">Requirements Gathering</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/3-requirements-gathering/requirements-gathering.md" target="_blank">📄 requirements-gathering.md</a>
+      </div>
+    </div>
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c4">4</div>
+        <div class="depi-card-title">System Analysis & Design</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/4-system-analysis-design/system-analysis-design.md" target="_blank">📄 system-analysis-design.md</a>
+        <span style="font-size:11px;color:#888;padding:2px 0;display:block">Includes: Use Case, ERD, DFD, Sequence,<br>Activity, State, Class diagrams + UI/UX</span>
+      </div>
+    </div>
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c5">5</div>
+        <div class="depi-card-title">Implementation</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/5-implementation/implementation-guide.md" target="_blank">📄 implementation-guide.md</a>
+        <span style="font-size:11px;color:#888;padding:2px 0;display:block">Includes: code standards, GitFlow,<br>CI/CD pipeline, installation guide</span>
+      </div>
+    </div>
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c6">6</div>
+        <div class="depi-card-title">Testing & QA</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/6-testing/testing-qa.md" target="_blank">📄 testing-qa.md</a>
+        <span style="font-size:11px;color:#888;padding:2px 0;display:block">20 test cases • 10 bug reports • 100% pass rate</span>
+      </div>
+    </div>
+
+    <div class="depi-card">
+      <div class="depi-card-header">
+        <div class="depi-num c7">7</div>
+        <div class="depi-card-title">Final Presentation & Reports</div>
+      </div>
+      <div class="depi-card-files">
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/7-final-presentation/user-manual.md" target="_blank">📄 user-manual.md</a>
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-4-final/presentation-notes.md" target="_blank">📄 presentation-notes.md</a>
+        <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-4-final/final-report.md" target="_blank">📄 final-report.md</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WEEKLY WORK -->
+  <div class="section-title">Weekly Work</div>
+  <div class="weeks-grid">
+
+    <div class="week-card">
+      <div class="week-header">
+        <div class="week-num w1">1</div>
+        <div class="week-title">Foundation & Awareness</div>
+      </div>
+      <div class="week-status">✅ Complete</div>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-1-foundation/research-report.md" target="_blank">📄 research-report.md</a>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-1-foundation/network-discovery.md" target="_blank">📄 network-discovery.md</a>
+    </div>
+
+    <div class="week-card">
+      <div class="week-header">
+        <div class="week-num w2">2</div>
+        <div class="week-title">IR Planning</div>
+      </div>
+      <div class="week-status">✅ Complete</div>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-2-ir-planning/incident-response-plan.md" target="_blank">📄 incident-response-plan.md</a>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-2-ir-planning/architecture-and-hardening.md" target="_blank">📄 architecture-and-hardening.md</a>
+    </div>
+
+    <div class="week-card">
+      <div class="week-header">
+        <div class="week-num w3">3</div>
+        <div class="week-title">Simulation</div>
+      </div>
+      <div class="week-status">✅ Complete</div>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-3-simulation/incident-scenario.md" target="_blank">📄 incident-scenario.md</a>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-3-simulation/simulation-log.md" target="_blank">📄 simulation-log.md</a>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-3-simulation/response-documentation.md" target="_blank">📄 response-documentation.md</a>
+    </div>
+
+    <div class="week-card">
+      <div class="week-header">
+        <div class="week-num w4">4</div>
+        <div class="week-title">Final Report</div>
+      </div>
+      <div class="week-status">✅ Complete</div>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-4-final/final-report.md" target="_blank">📄 final-report.md</a>
+      <a class="file-link" href="https://github.com/rei-rain/DEPI/blob/main/weekly-work/week-4-final/presentation-notes.md" target="_blank">📄 presentation-notes.md</a>
+    </div>
+
+  </div>
+
+  <!-- DELIVERABLES -->
+  <div class="section-title">Downloadable Deliverables</div>
+  <div class="deliverables-grid">
+    <a class="del-card" href="https://github.com/rei-rain/DEPI/raw/main/deliverables/FINAL-REPORT.docx" target="_blank">
+      <div class="del-icon">📘</div>
+      <div><div class="del-name">Final Report</div><div class="del-type">Word (.docx)</div></div>
+    </a>
+    <a class="del-card" href="https://github.com/rei-rain/DEPI/raw/main/deliverables/FINAL-REPORT.pdf" target="_blank">
+      <div class="del-icon">📕</div>
+      <div><div class="del-name">Final Report</div><div class="del-type">PDF</div></div>
+    </a>
+    <a class="del-card" href="https://github.com/rei-rain/DEPI/raw/main/deliverables/week1-research-report.docx" target="_blank">
+      <div class="del-icon">📗</div>
+      <div><div class="del-name">Week 1 Report</div><div class="del-type">Word (.docx)</div></div>
+    </a>
+    <a class="del-card" href="https://github.com/rei-rain/DEPI/raw/main/deliverables/week2-incident-response-plan.docx" target="_blank">
+      <div class="del-icon">📙</div>
+      <div><div class="del-name">Week 2 IR Plan</div><div class="del-type">Word (.docx)</div></div>
+    </a>
+    <a class="del-card" href="https://github.com/rei-rain/DEPI/raw/main/deliverables/week3-simulation-report.docx" target="_blank">
+      <div class="del-icon">📓</div>
+      <div><div class="del-name">Week 3 Simulation</div><div class="del-type">Word (.docx)</div></div>
+    </a>
+    <a class="del-card" href="https://github.com/rei-rain/DEPI/blob/main/deliverables/" target="_blank">
+      <div class="del-icon">📂</div>
+      <div><div class="del-name">All Files</div><div class="del-type">View on GitHub</div></div>
+    </a>
+  </div>
+
+  <!-- TEAM -->
+  <div class="section-title">Team</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-role" style="color:#185FA5">🔵 Role 1 — Research Lead</div>
+      <div class="team-name">[Name]</div>
+      <div class="team-desc">Threat research, literature review, executive summary</div>
+    </div>
+    <div class="team-card">
+      <div class="team-role" style="color:#0F6E56">🟢 Role 2 — Technical Lead</div>
+      <div class="team-name">[Name]</div>
+      <div class="team-desc">Architecture, network discovery, simulation execution</div>
+    </div>
+    <div class="team-card">
+      <div class="team-role" style="color:#854F0B">🟡 Role 3 — Documentation Lead</div>
+      <div class="team-name">[Name]</div>
+      <div class="team-desc">All formal reports, compilation, quality assurance</div>
+    </div>
+    <div class="team-card">
+      <div class="team-role" style="color:#534AB7">🟣 Role 4 — Presenter Lead</div>
+      <div class="team-name">[Name]</div>
+      <div class="team-desc">Slides, speaker notes, presentation delivery</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Cybersecurity Incident Response Framework — DEPI Academic Project &nbsp;|&nbsp;
+  <a href="https://github.com/rei-rain/DEPI" target="_blank" style="color:var(--blue)">github.com/rei-rain/DEPI</a>
+</footer>
+
+</body>
+</html>
