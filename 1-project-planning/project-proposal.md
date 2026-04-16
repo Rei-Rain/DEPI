@@ -75,10 +75,10 @@ This project solves that problem by building a complete, tested IR framework tha
 
 | Role | Member | Core Responsibility |
 |------|--------|-------------------|
-| Research Lead | Person A | Threat research, literature review, executive summary |
-| Technical Lead | Person B | Architecture, simulation, technical documentation |
-| Documentation Lead | Person C | All formal reports, compilation, quality assurance |
-| Presenter Lead | Person D | Slides, speaker notes, presentation delivery |
+| Research Lead | Omar | Threat research, literature review, executive summary |
+| Technical Lead | Youssef | Architecture, simulation, technical documentation |
+| Documentation Lead | Omar | All formal reports, compilation, quality assurance |
+| Presenter Lead | Mahmoud | Slides, speaker notes, presentation delivery |
 
 ---
 

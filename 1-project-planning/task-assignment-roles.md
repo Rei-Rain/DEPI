@@ -12,7 +12,7 @@ This project is divided across 4 team members, each assigned a primary role with
 
 ## 2. Role Definitions and Responsibilities
 
-### 🔵 Role 1 — Research Lead
+### 🔵 Role 1 — Omar
 
 **Core responsibility:** Finding, analyzing, and synthesizing all information the team builds on.
 
@@ -27,7 +27,7 @@ This project is divided across 4 team members, each assigned a primary role with
 
 ---
 
-### 🟢 Role 2 — Technical Lead
+### 🟢 Role 2 — Youssef
 
 **Core responsibility:** Owning all technical work — architecture, tools, and simulation execution.
 
@@ -42,7 +42,7 @@ This project is divided across 4 team members, each assigned a primary role with
 
 ---
 
-### 🟡 Role 3 — Documentation Lead
+### 🟡 Role 3 — Omar
 
 **Core responsibility:** Turning everyone's work into polished, structured, formally written documents.
 
@@ -57,7 +57,7 @@ This project is divided across 4 team members, each assigned a primary role with
 
 ---
 
-### 🟣 Role 4 — Presenter Lead
+### 🟣 Role 4 — Mahmoud
 
 **Core responsibility:** Converting all documents into professional slides and leading the presentation.
 
