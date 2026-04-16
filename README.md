@@ -10,10 +10,10 @@ Build a complete cybersecurity incident response framework covering planning, ex
 
 | Role | Member | Responsibility |
 |------|--------|---------------|
-| 🔵 Role 1 — Research Lead | [Name] | Threat research, literature review, executive summary |
-| 🟢 Role 2 — Technical Lead | [Name] | Architecture, network discovery, simulation execution |
-| 🟡 Role 3 — Documentation Lead | [Name] | Writes and compiles all formal reports |
-| 🟣 Role 4 — Presenter Lead | [Name] | Builds all slides and leads the presentation |
+| 🔵 Role 1 — Research Lead | Omar | Threat research, literature review, executive summary |
+| 🟢 Role 2 — Technical Lead | Youssef | Architecture, network discovery, simulation execution |
+| 🟡 Role 3 — Documentation Lead | Omar | Writes and compiles all formal reports |
+| 🟣 Role 4 — Presenter Lead | Mahmoud | Builds all slides and leads the presentation |
 
 ---
 
