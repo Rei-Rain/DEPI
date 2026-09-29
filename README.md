@@ -9,7 +9,7 @@ Build a complete cybersecurity incident response framework covering planning, ex
 ## Team Roles
 
 | Role | Responsibility |
-|------|--------|---------------|
+|------|---------------|
 | 🔵 Role 1 — Research Lead | Threat research, literature review, executive summary |
 | 🟢 Role 2 — Technical Lead |  Architecture, network discovery, simulation execution |
 | 🟡 Role 3 — Documentation Lead | Writes and compiles all formal reports |
